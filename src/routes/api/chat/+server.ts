@@ -34,7 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
       tokenCount += tokens;
     });
 
-    const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
+    const moderationRes = await fetch('https://api.groq.com/openai/v1/moderations', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${OPENAI_KEY}`
@@ -66,13 +66,13 @@ export const POST: RequestHandler = async ({ request }) => {
     ];
 
     const chatRequestOpts: CreateChatCompletionRequest = {
-      model: 'gpt-3.5-turbo',
+      model: 'llama3-8b-8192',
       messages,
       temperature: 0.9,
       stream: true
     };
 
-    const chatResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+    const chatResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       headers: {
         Authorization: `Bearer ${OPENAI_KEY}`,
         'Content-Type': 'application/json'
